@@ -21,7 +21,6 @@ import os
 import sys
 import numpy as np
 import paddle
-import signal
 import random
 
 __dir__ = os.path.dirname(os.path.abspath(__file__))
@@ -38,14 +37,6 @@ from ppocr.data.pgnet_dataset import PGDataSet
 
 __all__ = ['build_dataloader', 'transform', 'create_operators']
 
-
-def term_mp(sig_num, frame):
-    """ kill all child processes
-    """
-    pid = os.getpid()
-    pgid = os.getpgid(os.getpid())
-    print("main proc {} exit, kill process group " "{}".format(pid, pgid))
-    os.killpg(pgid, signal.SIGKILL)
 
 
 def build_dataloader(config, mode, device, logger, seed=None):
